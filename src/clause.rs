@@ -17,6 +17,10 @@ impl <'a>Item<'a> {
 
 pub type Clause<'a> = (Item<'a>, Item<'a>, Item<'a>);
 
+pub fn item<'a>(variable: &'a Variable, not: bool) -> Item<'a> {
+	Item::new(variable, not)
+}
+
 pub fn one<'a>(a: Item<'a>) -> Clause<'a> {
 	(a.clone(), a.clone(), a)
 }

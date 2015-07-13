@@ -1,7 +1,18 @@
 use variable::Variable;
 
-pub type Clause<'a> = (&'a Variable, &'a Variable, &'a Variable);
+pub struct Item<'a> {
+	variable: &'a Variable,
+	not: bool
+}
 
-pub fn clause<'a>(a: &'a Variable, b: &'a Variable, c: &'a Variable) -> Clause<'a> {
+impl <'a>Item<'a> {
+	pub fn new(variable: &'a Variable, not: bool) -> Item<'a> {
+		Item{variable: variable, not: not}
+	}
+}
+
+pub type Clause<'a> = (Item<'a>, Item<'a>, Item<'a>);
+
+pub fn clause<'a>(a: Item<'a>, b: Item<'a>, c: Item<'a>) -> Clause<'a> {
 	(a, b, c)
 }

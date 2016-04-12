@@ -17,9 +17,19 @@ impl <'a>CNF<'a> {
 		self.items.push(item)
 	}
 
+	fn clause_satisfied(&self, clause: &Clause<'a>, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
+		true
+	}
 
 	fn is_satisfied(&self, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
-		false
+		
+		for clause in &self.items {
+			if !self.clause_satisfied(clause, variables, allocation) {
+				return false;
+			}
+		}
+
+		true
 	}
 
 	fn satisfy_from(&self, i: usize, variables: &[&Variable], allocation: &mut Vec<bool>) -> bool {

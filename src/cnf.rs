@@ -17,15 +17,17 @@ impl <'a>CNF<'a> {
 		self.items.push(item)
 	}
 
-	pub fn is_satisfied(&self, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
-		true
+
+	fn is_satisfied(&self, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
+		false
 	}
 
-	pub fn satisfy_from(&self, i: usize, variables: &[&Variable], allocation: &mut Vec<bool>) -> bool {
+	fn satisfy_from(&self, i: usize, variables: &[&Variable], allocation: &mut Vec<bool>) -> bool {
 		
 		if i == allocation.len() {
 			self.is_satisfied(variables, allocation)
 		} else {
+
 			if self.satisfy_from(i + 1, variables, allocation) {
 				return true;
 			}

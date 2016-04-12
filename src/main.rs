@@ -20,5 +20,5 @@ fn main() {
 	cnf.add(clause_one);
 	cnf.add(clause_two);
 
-	println!("{}", cnf.can_satisfy(&[&a, &b, &b]));
+	println!("{}", if cnf.can_satisfy(&[&a, &b, &b]) { "satisfiable" } else { "not satisfiable" });
 }

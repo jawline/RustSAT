@@ -23,17 +23,22 @@ impl <'a>CNF<'a> {
 
 	pub fn satisfy_from(&self, i: usize, variables: &[&Variable], allocation: &mut Vec<bool>) -> bool {
 		
-		for j in (i+1)..allocation.len() {
-			allocation[j] = true;
-			
-			if self.is_satisfied(variables, allocation) {
+		if i == allocation.len() {
+			self.is_satisfied(variables, allocation)
+		} else {
+			if self.satisfy_from(i + 1, variables, allocation) {
 				return true;
 			}
 
-			allocation[j] = false;
-		}
+			allocation[i] = true;
 
-		false
+			if self.satisfy_from(i + 1, variables, allocation) {
+				return true;
+			}
+
+			allocation[i] = false;
+		}
+		
 	}
 
 	pub fn can_satisfy(&self, variables: &[&Variable]) -> bool {
@@ -44,22 +49,6 @@ impl <'a>CNF<'a> {
 			current_allocation.push(false);
 		}
 
-		if self.is_satisfied(variables, &current_allocation) {
-			return true;
-		}
-
-		for i in 0..current_allocation.len() {
-			current_allocation[i] = true;
-
-			if self.is_satisfied(variables, &current_allocation) {
-				return true;
-			}
-
-			if self.satisfy_from(i, variables, &mut current_allocation) {
-				return true;
-			}
-		}
-
-		false
+		return self.satisfy_from(0, variables, &mut current_allocation);
 	}
 }

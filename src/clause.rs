@@ -7,11 +7,17 @@ pub struct Item<'a> {
 
 impl <'a>Item<'a> {
 	pub fn new(variable: &'a Variable, not: bool) -> Item<'a> {
-		Item{variable: variable, not: not}
+		Item {
+			variable: variable,
+			not: not
+		}
 	}
 
 	pub fn clone(&self) -> Item<'a> {
-		Item{variable: self.variable, not: self.not}
+		Item {
+			variable: self.variable,
+			not: self.not
+		}
 	}
 }
 

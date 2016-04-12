@@ -18,8 +18,9 @@ impl <'a>CNF<'a> {
 	}
 
 	fn clause_satisfied(&self, clause: &Clause<'a>, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
-		let (one, two, three) = clause;
-		true;
+		let &(ref one, ref two, ref three) = clause;
+		one.variable.uid;
+		true
 	}
 
 	fn is_satisfied(&self, variables: &[&Variable], allocation: &Vec<bool>) -> bool {

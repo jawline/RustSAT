@@ -3,15 +3,18 @@ use std::string::ToString;
 static mut LAST_UID : usize = 0;
 
 pub struct Variable {
-	uid: usize,
-	name: String
+	pub uid: usize,
+	pub name: String
 }
 
 impl Variable {
 	pub fn new(name: &str) -> Variable {
 		unsafe {
 			LAST_UID = LAST_UID + 1;
-			Variable{uid: LAST_UID, name: format!("{}", name)}
+			Variable {
+				uid: LAST_UID,
+				name: format!("{}", name)
+			}
 		}
 	}
 }

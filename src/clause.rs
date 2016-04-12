@@ -1,8 +1,8 @@
 use variable::Variable;
 
 pub struct Item<'a> {
-	variable: &'a Variable,
-	not: bool
+	pub variable: &'a Variable,
+	pub not: bool
 }
 
 impl <'a>Item<'a> {

@@ -2,6 +2,7 @@ pub mod variable;
 pub mod clause;
 pub mod cnf;
 
+use cnf::CNF;
 use variable::Variable;
 use clause::item;
 
@@ -14,9 +15,10 @@ fn main() {
 	let clause_one = clause::two(item(&a, true), item(&b, false));
 	let clause_two = clause::two(item(&b, true), item(&c, false));
 
-	let mut cnf = cnf::CNF::new();
+	let mut cnf = CNF::new();
+
 	cnf.add(clause_one);
 	cnf.add(clause_two);
 
-	println!("{}", cnf.can_satisfy());
+	println!("{}", cnf.can_satisfy(&[&a, &b, &b]));
 }

@@ -39,9 +39,8 @@ impl <'a>CNF<'a> {
 			}
 
 			allocation[i] = false;
+			false
 		}
-		
-		false
 	}
 
 	pub fn can_satisfy(&self, variables: &[&Variable]) -> bool {

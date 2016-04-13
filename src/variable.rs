@@ -1,14 +1,14 @@
 use std::string::ToString;
 
 pub struct Variable {
-	pub uid: usize,
+	pub tid: usize,
 	pub name: String
 }
 
 impl Variable {
-	pub fn new(id: usize, name: &str) -> Variable {
+	pub fn new(name: &str) -> Variable {
 		Variable {
-			uid: id,
+			tid: 0,
 			name: format!("{}", name)
 		}
 	}

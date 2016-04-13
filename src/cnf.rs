@@ -20,9 +20,9 @@ impl <'a>CNF<'a> {
 	fn clause_satisfied(&self, clause: &Clause<'a>, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
 		let &(ref one, ref two, ref three) = clause;
 		
-		let mut one_res = allocation[one.variable.uid];
-		let mut two_res = allocation[two.variable.uid];
-		let mut three_res = allocation[three.variable.uid];
+		let mut one_res = allocation[one.variable.tid];
+		let mut two_res = allocation[two.variable.tid];
+		let mut three_res = allocation[three.variable.tid];
 
 		if one.not {
 			one_res = !one_res;
@@ -71,14 +71,18 @@ impl <'a>CNF<'a> {
 		}
 	}
 
-	pub fn can_satisfy(&self, variables: &[&Variable]) -> bool {
-		
+	pub fn initial_allocation(&self, variables: &mut [&mut Variable]) -> Vec<bool> {
 		let mut current_allocation = Vec::new();
 
-		for var in variables {
+		for var in 0..variables.len() {
+			variables[var].tid = var;
 			current_allocation.push(false);
 		}
 
-		return self.satisfy_from(0, variables, &mut current_allocation);
+		current_allocation
+	}
+
+	pub fn can_satisfy(&self, variables: &[&Variable], current_allocation: &mut Vec<bool>) -> bool {
+		return self.satisfy_from(0, variables, current_allocation);
 	}
 }

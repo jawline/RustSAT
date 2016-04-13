@@ -19,8 +19,24 @@ impl <'a>CNF<'a> {
 
 	fn clause_satisfied(&self, clause: &Clause<'a>, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
 		let &(ref one, ref two, ref three) = clause;
-		one.variable.uid;
-		true
+		
+		let mut one_res = allocation[one.variable.uid];
+		let mut two_res = allocation[two.variable.uid];
+		let mut three_res = allocation[three.variable.uid];
+
+		if one.not {
+			one_res = !one_res;
+		}
+
+		if two.not {
+			two_res = !two_res;
+		}
+
+		if three.not {
+			three_res = !three_res;
+		}
+
+		one_res & two_res & three_res
 	}
 
 	fn is_satisfied(&self, variables: &[&Variable], allocation: &Vec<bool>) -> bool {
